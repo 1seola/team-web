@@ -23,7 +23,7 @@ body {
   display: flex;
   flex: 1;
   margin: 0;
-  background-color: #000000;
+  background-color: #F5F5F5;
 }
 
 .view {
@@ -33,7 +33,7 @@ body {
 
 canvas {
   display: block;
-  background-color: black;
+  background-color: white;
 }
 
 ::-webkit-scrollbar {
