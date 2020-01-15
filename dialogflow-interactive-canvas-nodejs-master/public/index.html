@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+Copyright 2019 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Interactive Canvas Sample</title>
+
+    <!-- Disable favicon requests -->
+    <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,">
+
+    <!-- Load Interactive Canvas JavaScript -->
+    <script src="https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas.min.js"></script>
+
+    <!-- Load PixiJS for graphics rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.7/pixi.min.js"></script>
+
+    <!-- Load Stats.js for fps monitoring -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+
+    <!-- Load custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <div id="view" class="view">
+      <div class="debug">
+        <div class="stats"></div>
+        <div class="logs"></div>
+      </div>
+    </div>
+    <!-- Load custom JavaScript after elements are on page -->
+    <script src="js/action.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/log.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAqzgySOEl1N8PK4Mh58un0v6-01vtVp3o",
+        authDomain: "sample-cdcae.firebaseapp.com",
+        databaseURL: "https://sample-cdcae.firebaseio.com",
+        projectId: "sample-cdcae",
+        storageBucket: "sample-cdcae.appspot.com",
+        messagingSenderId: "1090836239958",
+        appId: "1:1090836239958:web:c35048eb2ab74c9e17cdf7",
+        measurementId: "G-Z8ETBQNKFB"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+  </body>
+</html>
