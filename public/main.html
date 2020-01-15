@@ -14,24 +14,108 @@ html {
 }
 </style>
 </head>
-<body>
+<body><br><br><br><br>
 <div style="text-align:center; "> <!-- 텍스트 정렬 방향 -->
 	<img src="./title_embo.png" style="max-width:60%; height:auto;"></a>
 </div>
 <div style="text-align:center">
 	<div style="text-align:center; width: 100%; overflow-x:auto">
 		<div style="float: left; width: 33%;">
-			<a href="game.html"><img src="./word.png" width="80%" height="80%" alt="낱말카드">
+			<a href="임시/짝맞추기.html"><img src="./word.png" width="80%" height="80%" alt="낱말카드">
 		</div>
 		<div style="float: left; width: 33%;">
-			<a href="game.html"><img src="./num.png" width="80%" height="80%" alt="숫자카드">
+			<a href="임시/짝맞추기.html"><img src="./num.png" width="80%" height="80%" alt="숫자카드">
 		</div>
 		<div style="float: left; width: 33%;">
 			<a href="review.html"><img src="./review.png" width="80%" height="80%" alt="다시보기">
 		</div>
 	</div>
 </div>
-<script src="card_game.js"></script>
+<script src="card_game.js">
+/* 여기 */
+'use strict';
+
+window.onload = () => {
+  this.scene = new Scene();
+
+  // Set Google Assistant Canvas Action at scene level
+  this.scene.action = new Action(scene);
+  // Call setCallbacks to register interactive canvas
+  this.scene.action.setCallbacks();
+};
+
+/**
+ * Represent Triangle scene
+ */
+class Scene {
+  /**
+   * Initializes the game with visual components.
+   */
+  constructor() {
+    const view = document.getElementById('view');
+
+    // set up fps monitoring
+    const stats = new Stats();
+    view.getElementsByClassName('stats')[0].appendChild(stats.domElement);
+
+    // initialize rendering and set correct sizing
+    this.radio = window.devicePixelRatio;
+    this.renderer = PIXI.autoDetectRenderer({
+      transparent: true,
+      antialias: true,
+      resolution: this.radio,
+      width: view.clientWidth,
+      height: view.clientHeight,
+    });
+    this.element = this.renderer.view;
+    this.element.style.width = `${this.renderer.width / this.radio}px`;
+    this.element.style.height = `${(this.renderer.height / this.radio)}px`;
+    view.appendChild(this.element);
+
+    // center stage and normalize scaling for all resolutions
+    this.stage = new PIXI.Container();
+    this.stage.position.set(view.clientWidth / 2, view.clientHeight / 2);
+    this.stage.scale.set(Math.max(this.renderer.width,
+        this.renderer.height) / 1024);
+
+    // load a sprite from a svg file
+    this.sprite = PIXI.Sprite.from('triangle.svg');
+    this.sprite.anchor.set(0.5);
+    this.sprite.tint = 0x00FF00; // green
+    this.sprite.spin = true;
+    this.stage.addChild(this.sprite);
+
+    // toggle spin on touch events of the triangle
+    this.sprite.interactive = true;
+    this.sprite.buttonMode = true;
+    this.sprite.on('pointerdown', () => {
+      this.sprite.spin = !this.sprite.spin;
+    });
+
+    let last = performance.now();
+    // frame-by-frame animation function
+    const frame = () => {
+      stats.begin();
+
+      // calculate time differences for smooth animations
+      const now = performance.now();
+      const delta = now - last;
+
+      // rotate the triangle only if spin is true
+      if (this.sprite.spin) {
+        this.sprite.rotation += delta / 1000;
+      }
+
+      last = now;
+
+      this.renderer.render(this.stage);
+      stats.end();
+      requestAnimationFrame(frame);
+    };
+    frame();
+    this.createRestartGameButton();
+  }</script>
+  /* 여기 */
 
 </body>
 </html>
